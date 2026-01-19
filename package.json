@@ -1,12 +1,13 @@
 {
   "name": "popcat-wrapper",
-  "version": "1.5.11",
+  "version": "1.6.0",
   "description": "An API wrapper for the Pop Cat API to make your life easier while using it!",
   "homepage": "https://api.popcat.xyz",
   "keywords": [
     "image generation",
     "discord.js",
-    "discord welcome card"
+    "discord welcome card",
+    "pop cat"
   ],
   "main": "index.js",
   "scripts": {
@@ -15,7 +16,6 @@
   "author": "Pop Cat",
   "license": "ISC",
   "dependencies": {
-    "mongoose": "^6.0.13",
     "node-fetch": "^2.6.1"
   }
 }

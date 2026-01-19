@@ -194,12 +194,15 @@ But here is the list:
  - `randomcolor()`
  - `fact()`
  - `_8ball()`
+ - `discordMessage({ username, content, avatar, color, timestamp })` // avatar, color, timestamp are optional
  - `drake(text1, text2)`
  - `pooh(text1, text2)`
  - `happysad(text1, text2)`
  - `ship(image1, image2)`
  - `quote(background_image, text, author_name)`
  - `colorify(image, color_name)`
+ - `couldread(text)`
+ - `supreme(text)`
  - `biden(text)`
  - `pikachu(text)`
  - `oogway(text)`
@@ -215,7 +218,7 @@ But here is the list:
  - `whowouldwin(image_url_1, image_url_2)`
  - `opinion(image_url, text)`
  - `wanted(image_url)`
- - `gun(image_url)`
+ - `gun(image_url, text)` (text is optional)
  - `jail(image_url)`
  - `translate(text, to_language)`
  - `reverse(text)`
@@ -234,12 +237,10 @@ But here is the list:
  - `texttomorse(text)`
  - `github(user_name)`
  - `weather(location_name)`
- - `banner(discord_user_id)`
  - `itunes(song_name)`
  - `country(country_name`
  - `npm(package_name)`
  - `colorinfo(color_hex)`
- - `shorten(url, extension)`
  - `screenshot(url)`
  - `steam(name)`
  - `imdb(moviename)`
