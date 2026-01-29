@@ -609,20 +609,38 @@ describe('Popcat Wrapper', () => {
     test('should validate required parameters in facts', async () => {
       await expect(wrapper.facts()).rejects.toThrow('The field \'text\' was left empty in the facts functuion.');
     });
-  });
-});
 
-describe('Original Test Case', () => {
-  test('should generate discordMessage URL correctly', () => {
-    const discordMessage = wrapper.discordMessage({
-      username: 'TestUser',
-      content: 'This is a test message',
-      color: '7289da',
+    test('should handle car function', async () => {
+      expect(typeof wrapper.car).toBe('function');
     });
 
-    expect(discordMessage).toContain('api.popcat.xyz/v2/discord-message');
-    expect(discordMessage).toContain('username=TestUser');
-    expect(discordMessage).toContain('content=This%20is%20a%20test%20message');
-    expect(discordMessage).toContain('color=7289da');
+    test('should handle showerthought function', async () => {
+      expect(typeof wrapper.showerthought).toBe('function');
+    });
+
+    test('should handle randommeme function', async () => {
+      expect(typeof wrapper.randommeme).toBe('function');
+    });
+
+    test('should handle wouldyourather function', async () => {
+      expect(typeof wrapper.wouldyourather).toBe('function');
+    });
+
+    test('should handle _8ball function', async () => {
+      expect(typeof wrapper._8ball).toBe('function');
+    });
+
+    test('should generate discordMessage URL correctly', () => {
+      const discordMessage = wrapper.discordMessage({
+        username: 'TestUser',
+        content: 'This is a test message',
+        color: '7289da',
+      });
+
+      expect(discordMessage).toContain('api.popcat.xyz/v2/discord-message');
+      expect(discordMessage).toContain('username=TestUser');
+      expect(discordMessage).toContain('content=This%20is%20a%20test%20message');
+      expect(discordMessage).toContain('color=7289da');
+    });
   });
 });
