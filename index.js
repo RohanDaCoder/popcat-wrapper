@@ -25,7 +25,7 @@ class CodeClient {
    * "Espresso Libre"|"GitHub Dark"|"GitHub Light"|"GitHub"|"IDLE"|"idleFingers"|
    * "iPlastic"|"Katzenmilch"|"krTheme"|"Kuroir Theme"|"LAZY"|"Merbivore Soft"|
    * "Merbivore"|"monoindustrial"|"Monokai Bright"|"Monokai"|"Night Owl"|"Nord"|
-   * "Oceanic Next"|"Pastels on Dark"|"Slush and Poppies"|"SpaceCadet"|"Sunburst"|
+   * "Oceanic Next"|"Pastels on Dark"|"Slush and Poppies"|"SpaceCadel"|"Sunburst"|
    * "Tomorrow"|"Twilight"|"Upstream Sunburst"|"Vibrant Ink"|"Xcode_default"|"Zenburnesque"}
    * [options.theme='GitHub Dark'] - Optional theme for syntax highlighting.
    * @param {"JavaScript"|"JSON"|"HTML"|"CSS"|"Markdown"|"PlainText"}
@@ -36,6 +36,16 @@ class CodeClient {
    *   - paste: The inserted paste object with details.
    *
    * @throws {Error} Throws an error if required parameters are missing or if the theme/language is invalid.
+   *
+   * @example
+   * const client = new CodeClient({ key: "your-api-key" });
+   * client.createBin({
+   *   title: "Example Paste",
+   *   description: "An example paste",
+   *   code: "console.log('Hello World');",
+   *   theme: "GitHub Dark",
+   *   language: "JavaScript"
+   * });
    */
 
   async createBin({ title, description, code, theme, language }) {
@@ -155,6 +165,23 @@ class CodeClient {
 }
 
 class Shortener {
+  /**
+   * Shortens a URL using the popcat URL shortener service.
+   *
+   * @param {Object} options - Options for URL shortening.
+   * @param {string} options.url - The URL to shorten. (Required)
+   * @param {string} options.extension - The custom extension for the shortened URL. (Required)
+   *
+   * @returns {Promise<Object>} - Returns a promise that resolves to the shortened URL information.
+   *
+   * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+   *
+   * @example
+   * Shortener.shorten({
+   *   url: "https://example.com",
+   *   extension: "mylink"
+   * });
+   */
   static async shorten({ url, extension }) {
     if (!url)
       throw new Error(
@@ -186,6 +213,21 @@ class Shortener {
     return json;
   }
 
+  /**
+   * Gets information about a shortened URL using the popcat URL shortener service.
+   *
+   * @param {Object} options - Options for getting URL info.
+   * @param {string} options.extension - The extension of the shortened URL. (Required)
+   *
+   * @returns {Promise<Object>} - Returns a promise that resolves to the URL information.
+   *
+   * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+   *
+   * @example
+   * Shortener.getInfo({
+   *   extension: "mylink"
+   * });
+   */
   static async getInfo({ extension }) {
     if (!extension)
       throw new Error(
@@ -216,6 +258,15 @@ class Shortener {
  * @returns {string} - Returns the URL of the generated Discord message image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * discordMessage({
+ *   username: "JohnDoe",
+ *   content: "Hello, world!",
+ *   avatar: "https://example.com/avatar.png",
+ *   color: "#ff0000",
+ *   timestamp: "2022-01-01T00:00:00Z"
+ * })
  */
 module.exports.discordMessage = ({
   username,
@@ -244,6 +295,9 @@ module.exports.discordMessage = ({
  * @returns {string} - Returns the URL of the generated couldread image.
  *
  * @throws {Error} Throws an error if the text parameter is missing or empty.
+ *
+ * @example
+ * couldread("Hello World")
  */
 module.exports.couldread = (text) => {
   if (!text || text.length === 0)
@@ -262,6 +316,9 @@ module.exports.couldread = (text) => {
  * @returns {string} - Returns the URL of the generated supreme image.
  *
  * @throws {Error} Throws an error if the text parameter is missing or empty.
+ *
+ * @example
+ * supreme("Hello World")
  */
 module.exports.supreme = (text) => {
   if (!text || text.length === 0)
@@ -282,6 +339,9 @@ module.exports.supreme = (text) => {
  * @returns {string|Error} - Returns the URL of the generated quote image or an error if validation fails.
  *
  * @throws {Error} Throws an error if required parameters are missing or if text length is invalid.
+ *
+ * @example
+ * quote("https://example.com/image.jpg", "Hello World", "John Doe")
  */
 module.exports.quote = (image, text, name) => {
   if (!image || !text || !name || name.length === 0)
@@ -305,6 +365,9 @@ module.exports.quote = (image, text, name) => {
  * @returns {string} - Returns the URL of the generated happysad image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * happysad("Happy text", "Sad text")
  */
 module.exports.happysad = async (text1, text2) => {
   if (!text1 || !text2)
@@ -323,6 +386,9 @@ module.exports.happysad = async (text1, text2) => {
  * @returns {string} - Returns the URL of the generated communism image.
  *
  * @throws {Error} Throws an error if the imageURL parameter is missing.
+ *
+ * @example
+ * communism("https://example.com/image.jpg")
  */
 module.exports.communism = async (imageURL) => {
   if (!imageURL)
@@ -337,6 +403,9 @@ module.exports.communism = async (imageURL) => {
  * Fetches a random color from the API.
  *
  * @returns {Promise<Object>} - Returns a promise that resolves to a color object.
+ *
+ * @example
+ * randomcolor()
  */
 module.exports.randomcolor = async () => {
   const color = await fetch("https://api.popcat.xyz/v2/randomcolor").then((r) =>
@@ -353,6 +422,9 @@ module.exports.randomcolor = async () => {
  * @returns {Promise<Object>} - Returns a promise that resolves to the element information.
  *
  * @throws {Error} Throws an error if the element parameter is missing or if the API returns an error.
+ *
+ * @example
+ * periodicTable("Hydrogen")
  */
 module.exports.periodicTable = async (element) => {
   if (!element)
@@ -376,6 +448,9 @@ module.exports.periodicTable = async (element) => {
  * @returns {string} - Returns the URL of the generated jail image.
  *
  * @throws {Error} Throws an error if the imageURL parameter is missing.
+ *
+ * @example
+ * jail("https://example.com/image.jpg")
  */
 module.exports.jail = function (imageURL) {
   if (!imageURL)
@@ -394,6 +469,9 @@ module.exports.jail = function (imageURL) {
  * @returns {string} - Returns the URL of the generated unforgivable image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * unforgivable("Hello World")
  */
 module.exports.unforgivable = function (text) {
   if (!text)
@@ -412,6 +490,9 @@ module.exports.unforgivable = function (text) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the IMDb information.
  *
  * @throws {Error} Throws an error if the name parameter is missing or if the API returns an error.
+ *
+ * @example
+ * imdb("The Matrix")
  */
 module.exports.imdb = async function (name) {
   if (!name)
@@ -432,6 +513,9 @@ module.exports.imdb = async function (name) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the Steam game information.
  *
  * @throws {Error} Throws an error if the name parameter is missing or if the API returns an error.
+ *
+ * @example
+ * steam("Half-Life 3")
  */
 module.exports.steam = async function (name) {
   if (!name)
@@ -453,6 +537,9 @@ module.exports.steam = async function (name) {
  * @returns {Promise<string>} - Returns a promise that resolves to the screenshot image URL.
  *
  * @throws {Error} Throws an error if the url parameter is missing or invalid.
+ *
+ * @example
+ * screenshot("https://example.com")
  */
 module.exports.screenshot = async function (url) {
   if (!url)
@@ -476,6 +563,9 @@ module.exports.screenshot = async function (url) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the song lyrics information.
  *
  * @throws {Error} Throws an error if the song parameter is missing or if the API returns an error.
+ *
+ * @example
+ * lyrics("Bohemian Rhapsody")
  */
 module.exports.lyrics = async function (song) {
   if (!song)
@@ -496,6 +586,9 @@ module.exports.lyrics = async function (song) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the car information.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * car()
  */
 module.exports.car = async function () {
   const res = await fetch(`https://api.popcat.xyz/v2/car`);
@@ -509,6 +602,9 @@ module.exports.car = async function () {
  * @returns {Promise<Object>} - Returns a promise that resolves to a shower thought.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * showerthought()
  */
 module.exports.showerthought = async function () {
   const res = await fetch(`https://api.popcat.xyz/v2/showerthoughts`);
@@ -524,6 +620,9 @@ module.exports.showerthought = async function () {
  * @returns {Promise<Object>} - Returns a promise that resolves to the subreddit information.
  *
  * @throws {Error} Throws an error if the subreddit parameter is missing or if the API returns an error.
+ *
+ * @example
+ * subreddit("programming")
  */
 module.exports.subreddit = async function (subreddit) {
   if (!subreddit)
@@ -545,6 +644,9 @@ module.exports.subreddit = async function (subreddit) {
  * @returns {string} - Returns the URL of the generated oogway image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * oogway("Hello World")
  */
 module.exports.oogway = function (text) {
   if (!text)
@@ -563,6 +665,9 @@ module.exports.oogway = function (text) {
  * @returns {string} - Returns the URL of the generated opinion image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * opinion("https://example.com/image.jpg", "Hello World")
  */
 module.exports.opinion = function (image, text) {
   if (!image)
@@ -584,6 +689,9 @@ module.exports.opinion = function (image, text) {
  * @returns {string} - Returns the URL of the generated wanted image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * wanted("https://example.com/image.jpg")
  */
 module.exports.wanted = function (image) {
   if (!image)
@@ -601,6 +709,9 @@ module.exports.wanted = function (image) {
  * @returns {string} - Returns the URL of the generated sadcat image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * sadcat("Hello World")
  */
 module.exports.sadcat = function (text) {
   if (!text)
@@ -618,6 +729,9 @@ module.exports.sadcat = function (text) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the GitHub user information.
  *
  * @throws {Error} Throws an error if the username parameter is missing or if the API returns an error.
+ *
+ * @example
+ * github("octocat")
  */
 module.exports.github = async function (username) {
   if (!username)
@@ -639,6 +753,9 @@ module.exports.github = async function (username) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the weather information.
  *
  * @throws {Error} Throws an error if the place parameter is missing or if the API returns an error.
+ *
+ * @example
+ * weather("New York")
  */
 module.exports.weather = async function (place) {
   if (!place)
@@ -660,6 +777,9 @@ module.exports.weather = async function (place) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the lulcat image information.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * lulcat("Hello World")
  */
 module.exports.lulcat = async function (text) {
   if (!text)
@@ -681,6 +801,9 @@ module.exports.lulcat = async function (text) {
  * @returns {string} - Returns the URL of the generated gun image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * gun("https://example.com/image.jpg", "Optional text")
  */
 module.exports.gun = function (image, text) {
   if (!image)
@@ -698,6 +821,9 @@ module.exports.gun = function (image, text) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the country information.
  *
  * @throws {Error} Throws an error if the country name parameter is missing or if the API returns an error.
+ *
+ * @example
+ * country("United States")
  */
 module.exports.country = async function (name) {
   if (!name)
@@ -721,6 +847,9 @@ module.exports.country = async function (name) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the npm package information.
  *
  * @throws {Error} Throws an error if the package name parameter is missing or if the API returns an error.
+ *
+ * @example
+ * npm("express")
  */
 module.exports.npm = async function (pkg) {
   if (!pkg)
@@ -739,6 +868,9 @@ module.exports.npm = async function (pkg) {
  * @returns {Promise<string>} - Returns a promise that resolves to a random fact.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * fact()
  */
 module.exports.fact = async function () {
   const url = `https://api.popcat.xyz/v2/fact`;
@@ -756,6 +888,9 @@ module.exports.fact = async function () {
  * @returns {string} - Returns the URL of the generated drake image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * drake("Dislike", "Like")
  */
 module.exports.drake = function (text1, text2) {
   if (!text1)
@@ -774,6 +909,9 @@ module.exports.drake = function (text1, text2) {
  * @returns {string} - Returns the URL of the generated pooh image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * pooh("Text 1", "Text 2")
  */
 module.exports.pooh = function (text1, text2) {
   if (!text1)
@@ -792,6 +930,9 @@ module.exports.pooh = function (text1, text2) {
  * @returns {string} - Returns the URL of the generated ship image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * ship("https://example.com/image1.jpg", "https://example.com/image2.jpg")
  */
 module.exports.ship = function (image1, image2) {
   if (!image1)
@@ -815,6 +956,9 @@ module.exports.ship = function (image1, image2) {
  * @returns {string} - Returns the URL of the generated colorified image.
  *
  * @throws {Error} Throws an error if required parameters are missing.
+ *
+ * @example
+ * colorify("https://example.com/image.jpg", "#FF0000")
  */
 module.exports.colorify = function (image, color) {
   if (!image)
@@ -836,6 +980,9 @@ module.exports.colorify = function (image, color) {
  * @returns {string} - Returns the URL of the generated biden image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * biden("Hello World")
  */
 module.exports.biden = function (text) {
   if (!text)
@@ -851,6 +998,9 @@ module.exports.biden = function (text) {
  * @returns {Promise<string>} - Returns a promise that resolves to a random joke.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * joke()
  */
 module.exports.joke = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/joke");
@@ -866,6 +1016,9 @@ module.exports.joke = async function () {
  * @returns {string} - Returns the URL of the generated pikachu image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * pikachu("Hello World")
  */
 module.exports.pikachu = function (text) {
   if (!text)
@@ -884,6 +1037,9 @@ module.exports.pikachu = function (text) {
  * @returns {string} - Returns the URL of the generated drip image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * drip("https://example.com/image.jpg")
  */
 module.exports.drip = function (image) {
   if (!image)
@@ -902,6 +1058,9 @@ module.exports.drip = function (image) {
  * @returns {string} - Returns the URL of the generated clown image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * clown("https://example.com/image.jpg")
  */
 module.exports.clown = function (image) {
   if (!image)
@@ -921,6 +1080,9 @@ module.exports.clown = function (image) {
  * @returns {Promise<string>} - Returns a promise that resolves to the translated text.
  *
  * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+ *
+ * @example
+ * translate("Hello", "es")
  */
 module.exports.translate = async function (text, to) {
   if (!text)
@@ -945,6 +1107,9 @@ module.exports.translate = async function (text, to) {
  * @returns {Promise<string>} - Returns a promise that resolves to the reversed text.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * reverse("Hello World")
  */
 module.exports.reverse = async function (text) {
   if (!text)
@@ -966,6 +1131,9 @@ module.exports.reverse = async function (text) {
  * @returns {string} - Returns the URL of the generated uncover image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * uncover("https://example.com/image.jpg")
  */
 module.exports.uncover = function (image) {
   if (!image)
@@ -984,6 +1152,9 @@ module.exports.uncover = function (image) {
  * @returns {string} - Returns the URL of the generated ad image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * ad("https://example.com/image.jpg")
  */
 module.exports.ad = function (image) {
   if (!image)
@@ -1002,6 +1173,9 @@ module.exports.ad = function (image) {
  * @returns {string} - Returns the URL of the generated blurred image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * blur("https://example.com/image.jpg")
  */
 module.exports.blur = function (image) {
   if (!image)
@@ -1020,6 +1194,9 @@ module.exports.blur = function (image) {
  * @returns {string} - Returns the URL of the generated inverted image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * invert("https://example.com/image.jpg")
  */
 module.exports.invert = function (image) {
   if (!image)
@@ -1038,6 +1215,9 @@ module.exports.invert = function (image) {
  * @returns {string} - Returns the URL of the generated greyscale image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * greyscale("https://example.com/image.jpg")
  */
 module.exports.greyscale = function (image) {
   if (!image)
@@ -1056,6 +1236,9 @@ module.exports.greyscale = function (image) {
  * @returns {string} - Returns the URL of the generated alert image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * alert("Warning message")
  */
 module.exports.alert = function (text) {
   if (!text)
@@ -1074,6 +1257,9 @@ module.exports.alert = function (text) {
  * @returns {string} - Returns the URL of the generated caution image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * caution("Caution message")
  */
 module.exports.caution = function (text) {
   if (!text)
@@ -1092,6 +1278,9 @@ module.exports.caution = function (text) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the color information.
  *
  * @throws {Error} Throws an error if the color parameter is missing or if the API returns an error.
+ *
+ * @example
+ * colorinfo("#FF0000")
  */
 module.exports.colorinfo = async function (color) {
   if (!color)
@@ -1118,6 +1307,9 @@ module.exports.colorinfo = async function (color) {
  * @returns {string} - Returns the URL of the generated jokeoverhead image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * jokeoverhead("https://example.com/image.jpg")
  */
 module.exports.jokeoverhead = function (image) {
   if (!image)
@@ -1136,6 +1328,9 @@ module.exports.jokeoverhead = function (image) {
  * @returns {string} - Returns the URL of the generated mnm image.
  *
  * @throws {Error} Throws an error if the image parameter is missing.
+ *
+ * @example
+ * mnm("https://example.com/image.jpg")
  */
 module.exports.mnm = function (image) {
   if (!image)
@@ -1154,6 +1349,9 @@ module.exports.mnm = function (image) {
  * @returns {Promise<string>} - Returns a promise that resolves to the mocked text.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * mock("Hello World")
  */
 module.exports.mock = async function (text) {
   if (!text)
@@ -1174,6 +1372,9 @@ module.exports.mock = async function (text) {
  * @returns {Promise<string>} - Returns a promise that resolves to the double struck text.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * doublestruck("Hello World")
  */
 module.exports.doublestruck = async function (text) {
   if (!text)
@@ -1195,6 +1396,9 @@ module.exports.doublestruck = async function (text) {
  * @returns {Promise<string>} - Returns a promise that resolves to the morse code representation of the text.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * texttomorse("Hello World")
  */
 module.exports.texttomorse = async function (text) {
   if (!text)
@@ -1214,6 +1418,9 @@ module.exports.texttomorse = async function (text) {
  * @returns {Promise<Object>} - Returns a promise that resolves to a "Would You Rather" question.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * wouldyourather()
  */
 module.exports.wouldyourather = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/wyr");
@@ -1228,6 +1435,9 @@ module.exports.wouldyourather = async function () {
  * @returns {Promise<Object>} - Returns a promise that resolves to a random meme.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * randommeme()
  */
 module.exports.randommeme = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/meme");
@@ -1247,6 +1457,9 @@ module.exports.randommeme = async function () {
  * @returns {string} - Returns the URL of the generated welcome card image.
  *
  * @throws {SyntaxError|Error} Throws an error if required parameters are missing or if background is not a valid PNG URL.
+ *
+ * @example
+ * welcomecard("https://example.com/background.png", "https://example.com/avatar.jpg", "Welcome", "User", "Join us!")
  */
 module.exports.welcomecard = function welcomecard(
   background,
@@ -1296,6 +1509,9 @@ module.exports.welcomecard = function welcomecard(
  * @returns {Promise<Object>} - Returns a promise that resolves to the iTunes song information.
  *
  * @throws {Error} Throws an error if the search parameter is missing or if the song is not found on iTunes.
+ *
+ * @example
+ * itunes("Bohemian Rhapsody")
  */
 module.exports.itunes = async function (x) {
   if (!x)
@@ -1320,6 +1536,9 @@ module.exports.itunes = async function (x) {
  * @returns {Promise<Object>} - Returns a promise that resolves to the chatbot response.
  *
  * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+ *
+ * @example
+ * chatbot("Hello", "Owner", "Bot")
  */
 module.exports.chatbot = async function (x, ownername, botname) {
   if (!x)
@@ -1349,6 +1568,9 @@ module.exports.chatbot = async function (x, ownername, botname) {
  * @returns {Promise<string>} - Returns a promise that resolves to the binary-encoded text.
  *
  * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * encode("Hello World")
  */
 module.exports.encode = async function (text) {
   if (!text)
@@ -1370,6 +1592,9 @@ module.exports.encode = async function (text) {
  * @returns {Promise<string>} - Returns a promise that resolves to the decoded text.
  *
  * @throws {Error} Throws an error if the binary text parameter is missing or if the API returns an error.
+ *
+ * @example
+ * decode("01001000 01100101 01101100 01101100 01101111")
  */
 module.exports.decode = async function (text) {
   if (!text)
@@ -1391,6 +1616,9 @@ module.exports.decode = async function (text) {
  * @returns {string} - Returns the URL of the generated facts image.
  *
  * @throws {Error} Throws an error if the text parameter is missing.
+ *
+ * @example
+ * facts("Did you know that...")
  */
 module.exports.facts = async function (text) {
   if (!text)
@@ -1407,6 +1635,9 @@ module.exports.facts = async function (text) {
  * @returns {Promise<string>} - Returns a promise that resolves to the 8ball answer.
  *
  * @throws {Error} Throws an error if the API returns an error.
+ *
+ * @example
+ * _8ball()
  */
 module.exports._8ball = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/8ball");
