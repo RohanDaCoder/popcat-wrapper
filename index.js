@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = require('axios')
 const baseurl = 'https://api.popcat.xyz/';
 
 function request(endpoint, input = '') {
