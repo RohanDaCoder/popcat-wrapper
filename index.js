@@ -203,6 +203,20 @@ class Shortener {
   }
 }
 
+/**
+ * Generates a Discord message image URL with custom parameters.
+ *
+ * @param {Object} params - Function parameters
+ * @param {string} params.username - Username for the Discord message. (Required)
+ * @param {string} params.content - Content of the Discord message. (Required)
+ * @param {string} [params.avatar] - Avatar URL for the Discord message.
+ * @param {string} [params.color] - Color for the Discord message.
+ * @param {string} [params.timestamp] - Timestamp for the Discord message.
+ *
+ * @returns {string} - Returns the URL of the generated Discord message image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.discordMessage = ({
   username,
   content,
@@ -222,6 +236,15 @@ module.exports.discordMessage = ({
   return url;
 };
 
+/**
+ * Generates a couldread image URL with the provided text.
+ *
+ * @param {string} text - Text to be displayed in the couldread image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated couldread image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or empty.
+ */
 module.exports.couldread = (text) => {
   if (!text || text.length === 0)
     throw new Error(
@@ -231,6 +254,15 @@ module.exports.couldread = (text) => {
   return url;
 };
 
+/**
+ * Generates a supreme image URL with the provided text.
+ *
+ * @param {string} text - Text to be displayed in the supreme image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated supreme image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or empty.
+ */
 module.exports.supreme = (text) => {
   if (!text || text.length === 0)
     throw new Error(
@@ -240,6 +272,17 @@ module.exports.supreme = (text) => {
   return url;
 };
 
+/**
+ * Generates a quote image URL with the provided image, text, and name.
+ *
+ * @param {string} image - Image URL for the quote. (Required)
+ * @param {string} text - Text for the quote. (Required, 1-125 characters)
+ * @param {string} name - Name for the quote. (Required)
+ *
+ * @returns {string|Error} - Returns the URL of the generated quote image or an error if validation fails.
+ *
+ * @throws {Error} Throws an error if required parameters are missing or if text length is invalid.
+ */
 module.exports.quote = (image, text, name) => {
   if (!image || !text || !name || name.length === 0)
     throw new Error(
@@ -253,6 +296,16 @@ module.exports.quote = (image, text, name) => {
   return url;
 };
 
+/**
+ * Generates a happysad image URL with the provided texts.
+ *
+ * @param {string} text1 - First text for the happysad image. (Required)
+ * @param {string} text2 - Second text for the happysad image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated happysad image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.happysad = async (text1, text2) => {
   if (!text1 || !text2)
     throw new Error(
@@ -262,6 +315,15 @@ module.exports.happysad = async (text1, text2) => {
   return url;
 };
 
+/**
+ * Generates a communism image URL with the provided image.
+ *
+ * @param {string} imageURL - Image URL for the communism effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated communism image.
+ *
+ * @throws {Error} Throws an error if the imageURL parameter is missing.
+ */
 module.exports.communism = async (imageURL) => {
   if (!imageURL)
     throw new Error(
@@ -271,6 +333,11 @@ module.exports.communism = async (imageURL) => {
   return url;
 };
 
+/**
+ * Fetches a random color from the API.
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to a color object.
+ */
 module.exports.randomcolor = async () => {
   const color = await fetch("https://api.popcat.xyz/v2/randomcolor").then((r) =>
     r.json(),
@@ -278,6 +345,15 @@ module.exports.randomcolor = async () => {
   return color;
 };
 
+/**
+ * Fetches information about an element from the periodic table.
+ *
+ * @param {string} element - Element symbol or name to look up. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the element information.
+ *
+ * @throws {Error} Throws an error if the element parameter is missing or if the API returns an error.
+ */
 module.exports.periodicTable = async (element) => {
   if (!element)
     throw new Error(
@@ -292,6 +368,15 @@ module.exports.periodicTable = async (element) => {
   return message;
 };
 
+/**
+ * Generates a jail image URL with the provided image.
+ *
+ * @param {string} imageURL - Image URL for the jail effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated jail image.
+ *
+ * @throws {Error} Throws an error if the imageURL parameter is missing.
+ */
 module.exports.jail = function (imageURL) {
   if (!imageURL)
     throw new Error(
@@ -301,6 +386,15 @@ module.exports.jail = function (imageURL) {
   return url;
 };
 
+/**
+ * Generates an unforgivable image URL with the provided text.
+ *
+ * @param {string} text - Text for the unforgivable image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated unforgivable image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.unforgivable = function (text) {
   if (!text)
     throw new Error(
@@ -310,6 +404,15 @@ module.exports.unforgivable = function (text) {
   return url;
 };
 
+/**
+ * Fetches movie/TV show information from IMDb.
+ *
+ * @param {string} name - Name of the movie or TV show to search for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the IMDb information.
+ *
+ * @throws {Error} Throws an error if the name parameter is missing or if the API returns an error.
+ */
 module.exports.imdb = async function (name) {
   if (!name)
     throw new Error(
@@ -321,6 +424,15 @@ module.exports.imdb = async function (name) {
   if (res.error) throw new Error(res.message.error);
   return res.message;
 };
+/**
+ * Fetches game information from Steam.
+ *
+ * @param {string} name - Name of the game to search for on Steam. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the Steam game information.
+ *
+ * @throws {Error} Throws an error if the name parameter is missing or if the API returns an error.
+ */
 module.exports.steam = async function (name) {
   if (!name)
     throw new Error(
@@ -333,6 +445,15 @@ module.exports.steam = async function (name) {
   if (error) throw new Error(message.error);
   return message;
 };
+/**
+ * Takes a screenshot of the provided URL.
+ *
+ * @param {string} url - URL to take a screenshot of. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the screenshot image URL.
+ *
+ * @throws {Error} Throws an error if the url parameter is missing or invalid.
+ */
 module.exports.screenshot = async function (url) {
   if (!url)
     throw new Error(
@@ -347,6 +468,15 @@ module.exports.screenshot = async function (url) {
   return img;
 };
 
+/**
+ * Fetches lyrics for the provided song.
+ *
+ * @param {string} song - Name of the song to get lyrics for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the song lyrics information.
+ *
+ * @throws {Error} Throws an error if the song parameter is missing or if the API returns an error.
+ */
 module.exports.lyrics = async function (song) {
   if (!song)
     throw new Error(
@@ -360,18 +490,41 @@ module.exports.lyrics = async function (song) {
   return message;
 };
 
+/**
+ * Fetches random car information.
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the car information.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.car = async function () {
   const res = await fetch(`https://api.popcat.xyz/v2/car`);
   const { error, message } = await res.json();
   if (error) throw new Error(`[Popcat Wrapper] ${message.error}`);
   return message;
 };
+/**
+ * Fetches a random shower thought.
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to a shower thought.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.showerthought = async function () {
   const res = await fetch(`https://api.popcat.xyz/v2/showerthoughts`);
   const { error, message } = await res.json();
   if (error) throw new Error(`[Popcat Wrapper] ${message.error}`);
   return message;
 };
+/**
+ * Fetches information about a subreddit.
+ *
+ * @param {string} subreddit - Name of the subreddit to get information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the subreddit information.
+ *
+ * @throws {Error} Throws an error if the subreddit parameter is missing or if the API returns an error.
+ */
 module.exports.subreddit = async function (subreddit) {
   if (!subreddit)
     throw new Error(
@@ -384,6 +537,15 @@ module.exports.subreddit = async function (subreddit) {
   if (error) throw new Error(`[Popcat Wrapper] ${message.error}`);
   return message;
 };
+/**
+ * Generates an oogway image URL with the provided text.
+ *
+ * @param {string} text - Text for the oogway image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated oogway image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.oogway = function (text) {
   if (!text)
     throw new Error(
@@ -392,6 +554,16 @@ module.exports.oogway = function (text) {
   const img = `https://api.popcat.xyz/v2/oogway?text=${encodeURIComponent(text)}`;
   return img;
 };
+/**
+ * Generates an opinion image URL with the provided image and text.
+ *
+ * @param {string} image - Image URL for the opinion image. (Required)
+ * @param {string} text - Text for the opinion image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated opinion image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.opinion = function (image, text) {
   if (!image)
     throw new Error(
@@ -404,6 +576,15 @@ module.exports.opinion = function (image, text) {
   const img = `https://api.popcat.xyz/v2/opinion?image=${encodeURIComponent(image)}&text=${encodeURIComponent(text)}`;
   return img;
 };
+/**
+ * Generates a wanted image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the wanted poster. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated wanted image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.wanted = function (image) {
   if (!image)
     throw new Error(
@@ -412,6 +593,15 @@ module.exports.wanted = function (image) {
   const url = `https://api.popcat.xyz/v2/wanted?image=${encodeURIComponent(image)}`;
   return url;
 };
+/**
+ * Generates a sadcat image URL with the provided text.
+ *
+ * @param {string} text - Text for the sadcat image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated sadcat image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.sadcat = function (text) {
   if (!text)
     throw new Error(
@@ -420,6 +610,15 @@ module.exports.sadcat = function (text) {
   const url = `${baseurl}v2/sadcat?text=${encodeURIComponent(text)}`;
   return url;
 };
+/**
+ * Fetches GitHub user information.
+ *
+ * @param {string} username - GitHub username to get information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the GitHub user information.
+ *
+ * @throws {Error} Throws an error if the username parameter is missing or if the API returns an error.
+ */
 module.exports.github = async function (username) {
   if (!username)
     throw new Error(
@@ -432,6 +631,15 @@ module.exports.github = async function (username) {
   if (error) throw new Error(`[Popcat Wrapper] Github: ${message.error}`);
   return message;
 };
+/**
+ * Fetches weather information for the provided place.
+ *
+ * @param {string} place - Place to get weather information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the weather information.
+ *
+ * @throws {Error} Throws an error if the place parameter is missing or if the API returns an error.
+ */
 module.exports.weather = async function (place) {
   if (!place)
     throw new Error(
@@ -444,6 +652,15 @@ module.exports.weather = async function (place) {
   if (error) throw new Error(`[Popcat Wrapper] Weather: ${message.error}`);
   return message;
 };
+/**
+ * Fetches a lulcat image with the provided text.
+ *
+ * @param {string} text - Text for the lulcat image. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the lulcat image information.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.lulcat = async function (text) {
   if (!text)
     throw new Error(
@@ -455,6 +672,16 @@ module.exports.lulcat = async function (text) {
   if (error) throw new Error(`[Popcat Wrapper] Lul Cat: ${message.error}`);
   return message;
 };
+/**
+ * Generates a gun image URL with the provided image and optional text.
+ *
+ * @param {string} image - Image URL for the gun image. (Required)
+ * @param {string} [text] - Optional text for the gun image.
+ *
+ * @returns {string} - Returns the URL of the generated gun image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.gun = function (image, text) {
   if (!image)
     throw new Error(
@@ -463,6 +690,15 @@ module.exports.gun = function (image, text) {
   const url = `https://api.popcat.xyz/v2/gun?image=${encodeURIComponent(image)}${text ? `&text=${encodeURIComponent(text)}` : ""}`;
   return url;
 };
+/**
+ * Fetches information about a country.
+ *
+ * @param {string} name - Name of the country to get information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the country information.
+ *
+ * @throws {Error} Throws an error if the country name parameter is missing or if the API returns an error.
+ */
 module.exports.country = async function (name) {
   if (!name)
     throw new Error(
@@ -477,6 +713,15 @@ module.exports.country = async function (name) {
   return message;
 };
 
+/**
+ * Fetches information about an npm package.
+ *
+ * @param {string} pkg - Name of the npm package to get information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the npm package information.
+ *
+ * @throws {Error} Throws an error if the package name parameter is missing or if the API returns an error.
+ */
 module.exports.npm = async function (pkg) {
   if (!pkg)
     throw new Error(
@@ -488,6 +733,13 @@ module.exports.npm = async function (pkg) {
   if (error) throw new Error(`[Popcat Wrapper] NPM: ${message.error}`);
   return message;
 };
+/**
+ * Fetches a random fact.
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to a random fact.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.fact = async function () {
   const url = `https://api.popcat.xyz/v2/fact`;
   const res = await fetch(url);
@@ -495,6 +747,16 @@ module.exports.fact = async function () {
   if (error) throw new Error(`[Popcat Wrapper] Fact: ${message.error}`);
   return message.fact;
 };
+/**
+ * Generates a drake image URL with the provided texts.
+ *
+ * @param {string} text1 - First text for the drake image. (Required)
+ * @param {string} text2 - Second text for the drake image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated drake image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.drake = function (text1, text2) {
   if (!text1)
     throw new Error("The field text1 was left empty in the drake function");
@@ -503,6 +765,16 @@ module.exports.drake = function (text1, text2) {
   const response = `https://api.popcat.xyz/v2/drake?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}`;
   return response;
 };
+/**
+ * Generates a pooh image URL with the provided texts.
+ *
+ * @param {string} text1 - First text for the pooh image. (Required)
+ * @param {string} text2 - Second text for the pooh image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated pooh image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.pooh = function (text1, text2) {
   if (!text1)
     throw new Error("The field text1 was left empty in the pooh function");
@@ -511,6 +783,16 @@ module.exports.pooh = function (text1, text2) {
   const response = `https://api.popcat.xyz/v2/pooh?text1=${encodeURIComponent(text1)}&text2=${encodeURIComponent(text2)}`;
   return response;
 };
+/**
+ * Generates a ship image URL with the provided images.
+ *
+ * @param {string} image1 - First image URL for the ship image. (Required)
+ * @param {string} image2 - Second image URL for the ship image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated ship image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.ship = function (image1, image2) {
   if (!image1)
     throw new Error(
@@ -524,6 +806,16 @@ module.exports.ship = function (image1, image2) {
   const response = `https://api.popcat.xyz/v2/ship?${input}`;
   return response;
 };
+/**
+ * Generates a colorified image URL with the provided image and color.
+ *
+ * @param {string} image - Image URL to colorify. (Required)
+ * @param {string} color - Color to apply to the image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated colorified image.
+ *
+ * @throws {Error} Throws an error if required parameters are missing.
+ */
 module.exports.colorify = function (image, color) {
   if (!image)
     throw new Error(
@@ -536,6 +828,15 @@ module.exports.colorify = function (image, color) {
   const response = `https://api.popcat.xyz/v2/colorify?image=${encodeURIComponent(image)}&color=${encodeURIComponent(color)}`;
   return response;
 };
+/**
+ * Generates a biden image URL with the provided text.
+ *
+ * @param {string} text - Text for the biden image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated biden image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.biden = function (text) {
   if (!text)
     throw new Error(
@@ -544,12 +845,28 @@ module.exports.biden = function (text) {
   const res = `https://api.popcat.xyz/v2/biden?text=${encodeURIComponent(text)}`;
   return res;
 };
+/**
+ * Fetches a random joke.
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to a random joke.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.joke = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/joke");
   const { error, message } = await res.json();
   if (error) throw new Error(`[Popcat Wrapper] Joke: ${message.error}`);
   return message.joke;
 };
+/**
+ * Generates a pikachu image URL with the provided text.
+ *
+ * @param {string} text - Text for the pikachu image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated pikachu image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.pikachu = function (text) {
   if (!text)
     throw new Error(
@@ -559,6 +876,15 @@ module.exports.pikachu = function (text) {
   const response = `https://api.popcat.xyz/v2/pikachu?${input}`;
   return response;
 };
+/**
+ * Generates a drip image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the drip effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated drip image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.drip = function (image) {
   if (!image)
     throw new Error(
@@ -568,6 +894,15 @@ module.exports.drip = function (image) {
   const response = `https://api.popcat.xyz/v2/drip?${input}`;
   return response;
 };
+/**
+ * Generates a clown image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the clown effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated clown image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.clown = function (image) {
   if (!image)
     throw new Error(
@@ -577,6 +912,16 @@ module.exports.clown = function (image) {
   const response = `https://api.popcat.xyz/v2/clown?${input}`;
   return response;
 };
+/**
+ * Translates text to the specified language.
+ *
+ * @param {string} text - Text to translate. (Required)
+ * @param {string} to - Target language code to translate to. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the translated text.
+ *
+ * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+ */
 module.exports.translate = async function (text, to) {
   if (!text)
     throw new Error(
@@ -592,6 +937,15 @@ module.exports.translate = async function (text, to) {
   if (error) throw new Error(`[Popcat Wrapper] Translate: ${message.error}`);
   return message.translated;
 };
+/**
+ * Reverses the provided text.
+ *
+ * @param {string} text - Text to reverse. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the reversed text.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.reverse = async function (text) {
   if (!text)
     throw new Error(
@@ -604,6 +958,15 @@ module.exports.reverse = async function (text) {
   if (error) throw new Error(`[Popcat Wrapper] Reverse: ${message.error}`);
   return message.text;
 };
+/**
+ * Generates an uncover image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the uncover effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated uncover image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.uncover = function (image) {
   if (!image)
     throw new Error(
@@ -613,6 +976,15 @@ module.exports.uncover = function (image) {
   const res = request("uncover", input);
   return res;
 };
+/**
+ * Generates an ad image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the ad effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated ad image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.ad = function (image) {
   if (!image)
     throw new Error(
@@ -622,6 +994,15 @@ module.exports.ad = function (image) {
   const res = request("ad", input);
   return res;
 };
+/**
+ * Generates a blurred image URL with the provided image.
+ *
+ * @param {string} image - Image URL to blur. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated blurred image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.blur = function (image) {
   if (!image)
     throw new Error(
@@ -631,6 +1012,15 @@ module.exports.blur = function (image) {
   const res = request("blur", input);
   return res;
 };
+/**
+ * Generates an inverted image URL with the provided image.
+ *
+ * @param {string} image - Image URL to invert. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated inverted image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.invert = function (image) {
   if (!image)
     throw new Error(
@@ -640,6 +1030,15 @@ module.exports.invert = function (image) {
   const res = request("invert", input);
   return res;
 };
+/**
+ * Generates a greyscale image URL with the provided image.
+ *
+ * @param {string} image - Image URL to convert to greyscale. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated greyscale image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.greyscale = function (image) {
   if (!image)
     throw new Error(
@@ -649,6 +1048,15 @@ module.exports.greyscale = function (image) {
   const res = request("greyscale", input);
   return res;
 };
+/**
+ * Generates an alert image URL with the provided text.
+ *
+ * @param {string} text - Text for the alert image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated alert image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.alert = function (text) {
   if (!text)
     throw new Error(
@@ -658,6 +1066,15 @@ module.exports.alert = function (text) {
   const res = request("alert", input);
   return res;
 };
+/**
+ * Generates a caution image URL with the provided text.
+ *
+ * @param {string} text - Text for the caution image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated caution image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.caution = function (text) {
   if (!text)
     throw new Error(
@@ -667,6 +1084,15 @@ module.exports.caution = function (text) {
   const res = request("caution", input);
   return res;
 };
+/**
+ * Fetches information about a color.
+ *
+ * @param {string} color - Hex color code to get information for. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the color information.
+ *
+ * @throws {Error} Throws an error if the color parameter is missing or if the API returns an error.
+ */
 module.exports.colorinfo = async function (color) {
   if (!color)
     throw new Error(
@@ -684,6 +1110,15 @@ module.exports.colorinfo = async function (color) {
     );
   return message;
 };
+/**
+ * Generates a jokeoverhead image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the jokeoverhead effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated jokeoverhead image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.jokeoverhead = function (image) {
   if (!image)
     throw new Error(
@@ -693,6 +1128,15 @@ module.exports.jokeoverhead = function (image) {
   const res = request("jokeoverhead", input);
   return res;
 };
+/**
+ * Generates an mnm image URL with the provided image.
+ *
+ * @param {string} image - Image URL for the mnm effect. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated mnm image.
+ *
+ * @throws {Error} Throws an error if the image parameter is missing.
+ */
 module.exports.mnm = function (image) {
   if (!image)
     throw new Error(
@@ -702,6 +1146,15 @@ module.exports.mnm = function (image) {
   const res = request("mnm", input);
   return res;
 };
+/**
+ * Converts text to mocked text (alternating uppercase and lowercase letters).
+ *
+ * @param {string} text - Text to mock. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the mocked text.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.mock = async function (text) {
   if (!text)
     throw new Error(
@@ -713,6 +1166,15 @@ module.exports.mock = async function (text) {
   if (error) throw new Error(`[Popcat Wrapper] Mock: ${message.error}`);
   return message.text;
 };
+/**
+ * Converts text to double struck (mathematical bold) characters.
+ *
+ * @param {string} text - Text to convert to double struck. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the double struck text.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.doublestruck = async function (text) {
   if (!text)
     throw new Error(
@@ -725,6 +1187,15 @@ module.exports.doublestruck = async function (text) {
   return message.text;
 };
 
+/**
+ * Converts text to morse code.
+ *
+ * @param {string} text - Text to convert to morse code. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the morse code representation of the text.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.texttomorse = async function (text) {
   if (!text)
     throw new Error(
@@ -737,6 +1208,13 @@ module.exports.texttomorse = async function (text) {
   return message.morse;
 };
 
+/**
+ * Fetches a "Would You Rather" question.
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to a "Would You Rather" question.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.wouldyourather = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/wyr");
   const { error, message } = await res.json();
@@ -744,12 +1222,32 @@ module.exports.wouldyourather = async function () {
     throw new Error(`[Popcat Wrapper] WouldYouRather: ${message.error}`);
   return message;
 };
+/**
+ * Fetches a random meme.
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to a random meme.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports.randommeme = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/meme");
   const { error, message } = await res.json();
   if (error) throw new Error(`[Popcat Wrapper] Meme: ${message.error}`);
   return message;
 };
+/**
+ * Generates a welcome card image URL with the provided parameters.
+ *
+ * @param {string} background - Background image URL for the welcome card (must be a PNG). (Required)
+ * @param {string} avatar - Avatar image URL for the welcome card. (Required)
+ * @param {string} text_1 - First text element for the welcome card. (Required)
+ * @param {string} text_2 - Second text element for the welcome card. (Required)
+ * @param {string} text_3 - Third text element for the welcome card. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated welcome card image.
+ *
+ * @throws {SyntaxError|Error} Throws an error if required parameters are missing or if background is not a valid PNG URL.
+ */
 module.exports.welcomecard = function welcomecard(
   background,
   avatar,
@@ -790,6 +1288,15 @@ module.exports.welcomecard = function welcomecard(
   return welcomeimg;
 };
 
+/**
+ * Fetches song information from iTunes.
+ *
+ * @param {string} x - Song name or search query for iTunes. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the iTunes song information.
+ *
+ * @throws {Error} Throws an error if the search parameter is missing or if the song is not found on iTunes.
+ */
 module.exports.itunes = async function (x) {
   if (!x)
     throw new Error(
@@ -803,6 +1310,17 @@ module.exports.itunes = async function (x) {
   return message;
 };
 
+/**
+ * Interacts with a chatbot API.
+ *
+ * @param {string} x - Message content to send to the chatbot. (Required)
+ * @param {string} ownername - Name of the bot owner. (Required)
+ * @param {string} botname - Name of the bot. (Required)
+ *
+ * @returns {Promise<Object>} - Returns a promise that resolves to the chatbot response.
+ *
+ * @throws {Error} Throws an error if required parameters are missing or if the API returns an error.
+ */
 module.exports.chatbot = async function (x, ownername, botname) {
   if (!x)
     throw new Error(
@@ -823,6 +1341,15 @@ module.exports.chatbot = async function (x, ownername, botname) {
   if (error) throw new Error(`[Popcat Wrapper] Chatbot: ${message.error}`);
   return message;
 };
+/**
+ * Encodes text to binary.
+ *
+ * @param {string} text - Text to encode to binary. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the binary-encoded text.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing or if the API returns an error.
+ */
 module.exports.encode = async function (text) {
   if (!text)
     throw new Error(
@@ -835,6 +1362,15 @@ module.exports.encode = async function (text) {
     throw new Error(`[Popcat Wrapper] Binary Encode: ${message.error}`);
   return message.text;
 };
+/**
+ * Decodes binary text back to normal text.
+ *
+ * @param {string} text - Binary text to decode. (Required)
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the decoded text.
+ *
+ * @throws {Error} Throws an error if the binary text parameter is missing or if the API returns an error.
+ */
 module.exports.decode = async function (text) {
   if (!text)
     throw new Error(
@@ -847,6 +1383,15 @@ module.exports.decode = async function (text) {
     throw new Error(`[Popcat Wrapper] Binary Decode: ${message.error}`);
   return message.text;
 };
+/**
+ * Generates a facts image URL with the provided text.
+ *
+ * @param {string} text - Text for the facts image. (Required)
+ *
+ * @returns {string} - Returns the URL of the generated facts image.
+ *
+ * @throws {Error} Throws an error if the text parameter is missing.
+ */
 module.exports.facts = async function (text) {
   if (!text)
     throw new Error(
@@ -856,6 +1401,13 @@ module.exports.facts = async function (text) {
   const res = request("facts", input);
   return res;
 };
+/**
+ * Gets a random 8ball response.
+ *
+ * @returns {Promise<string>} - Returns a promise that resolves to the 8ball answer.
+ *
+ * @throws {Error} Throws an error if the API returns an error.
+ */
 module.exports._8ball = async function () {
   const res = await fetch("https://api.popcat.xyz/v2/8ball");
   const { error, message } = await res.json();

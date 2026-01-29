@@ -194,68 +194,11 @@ const attachment = new Discord.MessageAttachment(image, "welcomecard.png")
 
 ## Endpoints
 
-You can get a full list of the possible API endpoints [Here](https://api.popca.xyz)
+You can get a full list of the possible API endpoints [Here](https://api.popcat.xyz)
 But here is the list:
 
-- `joke()`
-- `car()`
-- `showerthoughts()`
-- `randommeme()`
-- `randomcolor()`
-- `fact()`
-- `_8ball()`
-- `discordMessage({ username, content, avatar, color, timestamp })` // avatar, color, timestamp are optional
-- `drake(text1, text2)`
-- `pooh(text1, text2)`
-- `happysad(text1, text2)`
-- `ship(image1, image2)`
-- `quote(background_image, text, author_name)`
-- `colorify(image, color_name)`
-- `couldread(text)`
-- `supreme(text)`
-- `biden(text)`
-- `pikachu(text)`
-- `oogway(text)`
-- `drip(image)`
-- `communism(image_url)`
-- `clown(image_url)`
-- `ad(image_url)`
-- `blur(image_url)`
-- `invert(image_url)`
-- `greyscale(image_url)`
-- `jokeoverhead(image_url)`
-- `mnm(image_url)`
-- `whowouldwin(image_url_1, image_url_2)`
-- `opinion(image_url, text)`
-- `wanted(image_url)`
-- `gun(image_url, text)` (text is optional)
-- `jail(image_url)`
-- `translate(text, to_language)`
-- `reverse(text)`
-- `alert(text)`
-- `caution(text)`
-- `mock(text)`
-- `facts(text)`
-- `encode(text)`
-- `sadcat(text)`
-- `lulcat(text)`
-- `unforgivable(text)`
-- `decode(binary)`
-- `lyrics(song)`
-- `subreddit(subredditName)`
-- `doublestruck(text)`
-- `texttomorse(text)`
-- `github(user_name)`
-- `weather(location_name)`
-- `itunes(song_name)`
-- `country(country_name`
-- `npm(package_name)`
-- `colorinfo(color_hex)`
-- `screenshot(url)`
-- `steam(name)`
-- `imdb(moviename)`
-- `welcomecard(background, avatar, text_1, text_2, text_3)`
-- `periodicTable(element_name_symbol_or_number)`
+## Documentation
+You can find the full documentation [here](docs.md)
 
 ## Credits
 
