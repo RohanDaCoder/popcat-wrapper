@@ -5,7 +5,7 @@ const wrapper = require("../index");
     const discordMessage = await wrapper.discordMessage({
       username: "TestUser",
       content: "This is a test message",
-      color: "7289da"
+      color: "7289da",
     });
     console.log("Discord Message image URL:", discordMessage);
   } catch (err) {
