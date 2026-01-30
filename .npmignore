@@ -1,0 +1,5 @@
+jest.config.js
+tests/
+node_modules/
+.git/
+README.md
