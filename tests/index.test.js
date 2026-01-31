@@ -1,4 +1,4 @@
-const wrapper = require('../src/index');
+const wrapper = require('../dist/index.cjs');
 
 describe('Popcat Wrapper', () => {
 	// Test utility functions
